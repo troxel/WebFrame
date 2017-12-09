@@ -1,0 +1,51 @@
+
+
+htdocs/
+       Apps/
+            templates/
+            style/
+            images/
+            doc_arc/
+            ddt/
+            elogit/
+                   myelogit_demo/
+                                 .conf.pm                   { see 3. }
+                                 $node_id/
+                                         upload/
+                                         user/${usr_id}.pm  { see 4. }
+       :
+       :
+       my_logs/
+               weekly_status/
+                             .conf.pm  { see 1. }
+                             .pref.pm  { see 2. }
+
+-------------------------------------------------------------------------
+
+1. Indentification, security information
+    - name
+    - icon
+    - node_id
+    - app_id
+    - dsn_id
+    - grps -> { hsh of grps premissions }
+    - usrs -> { hsh of grps premissions }
+    - AllowOverRide ( None - stops hierarchy transversing )
+
+2. Applicaton instance display/preference information
+    - acct_lst
+    - time_keep_flg
+    - upld_flg
+    - paging
+    - folding
+
+3. Application specific Informatino
+    - database (dsn,usr,passwd)
+
+4. User preferences
+    - paging
+
+
+
+
+

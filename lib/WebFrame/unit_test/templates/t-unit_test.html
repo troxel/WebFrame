@@ -1,0 +1,45 @@
+<HTML><HEAD><TITLE>test.html</TITLE></HEAD>
+
+<h1>This is the main body at top </h1>
+
+
+&include_file(t-include.html)
+
+
+The time is: <b> &get_time(now) </b>
+
+<!-- BEGIN NAME=rim  -->
+<table width="500" cellspacing=0 cellpadding=2 border="0" bgcolor="blue">
+
+ <!-- BEGIN NAME=tbl  -->
+ <tr><td align=center>
+   <table width="100%" border="1" align="center" bgcolor="white">
+     <tr>
+       <th colspan=2> Hash Name: "$hsh_name" </th>
+     </tr>
+
+     <tr>
+       <th> Key </th>
+       <th> Value </th>
+     </tr>
+
+     <!-- BEGIN NAME=inner_row -->
+     <tr>
+       <td> $key </td>
+       <td> $value </td>
+     </tr>
+     <!-- END NAME=inner_row -->
+   </table>
+ </tr><td>
+ <!-- END NAME=tbl  -->
+
+</table>
+<!-- END NAME=rim  -->
+
+<h1>This is the main body at bottom </h1>
+
+<!-- BEGIN NAME=option -->
+This is text is completely optional
+<!-- END NAME=option -->
+
+End
