@@ -44,8 +44,8 @@ sub new
   {
      $realm_info{'ssn_dir'} = "/tmp/$realm_name/.ssn";
      #unless ( -d "/tmp/$realm_name" ) { mkdir "/tmp/$realm_name" }
-     #unless ( -d "/tmp/$realm_name/.ssn" ) { mkdir "/tmp/$realm_name/.ssn" }
-     debug( "No Ssn Directory Defined in realm configuration: $realm_name"); exit;
+     unless ( -d "/tmp/$realm_name/.ssn" ) { mkdir "/tmp/$realm_name/.ssn" }
+     #debug( "No Ssn Directory Defined in realm configuration: $realm_name"); exit;
   }
   my $ssn_obj = new WebFrame::Ssn('dir'=>$realm_info{'ssn_dir'}, 'name'=>'ticket');
 
@@ -693,12 +693,14 @@ use WebFrame::Sys;
   # Try really hard to find a realm.conf file. This file is a bootstrap to get everything working
   # The ENV var can be set via the .htaccess
   if ( $ENV{'REDIRECT_realm_conf'} ) { $default{'fspec'} = "$ENV{'REDIRECT_realm_conf'}/realm.conf" }
+  elsif ( $ENV{'realm_conf'} ) { $default{'fspec'} = "$ENV{'realm_conf'}/realm.conf" }
   elsif ( -e "/var/www/realm.conf" ) { $default{'fspec'} = "/var/www/realm.conf" }
   else 
   { # Common config for suexec setups  
     $ENV{'DOCUMENT_ROOT'} =~ /(.+)\//; 
     my $dir = $1; 
-    if ( -e "$dir/realm.conf" ) { $default{'fspec'} = "$dir/realm.conf" }
+    if    ( -e "$dir/realm.conf" ) { $default{'fspec'} = "$dir/realm.conf" }
+    elsif ( -e "$dir/webframe/realm.conf" ) { $default{'fspec'} = "$dir/webframe/realm.conf" }  # Older perlworks uses this... 
     else { debug('Realm Configuration file not found')  }
   }
 

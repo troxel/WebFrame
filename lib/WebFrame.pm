@@ -52,7 +52,9 @@ foreach ( $Query->cookie() )
 # Common directories
 $Dir{'root'} = $ENV{'DOCUMENT_ROOT'} ;
 
-if ( -e $ENV{'home_wframe'} ) { $Dir{'home_wframe'} = $ENV{'home_wframe'} }
+# Added home_wframe to comply with stig requirements of having writable dirs outside document_root
+if ( -e $ENV{'home_wframe'} ) { $Dir{'home_wframe'} = $ENV{'home_wframe'} }               
+elsif ( -e "$ENV{'DOCUMENT_ROOT'}/Apps" ) { $Dir{'home_wframe'} = $ENV{'DOCUMENT_ROOT'}; }  # Still used for perlworks sites
 else { $Dir{'home_wframe'} = '/var/www' } 
 
 # Get the relative path and query string
